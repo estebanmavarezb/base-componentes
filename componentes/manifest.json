@@ -13,6 +13,7 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
+    "vtex.search-page-context": "0.x",
     "vtex.store": "2.x",
     "vtex.search-graphql": "0.x",
     "vtex.product-context": "0.x",
