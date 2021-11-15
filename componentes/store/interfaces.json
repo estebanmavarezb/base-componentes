@@ -1,5 +1,9 @@
 {
   "glamit-component-atributos":{
     "component": "Atributos"
+  },
+  "glamit-destaques-container":{
+    "component": "DestaqueContainer",
+    "composition": "children"
   }
 }
