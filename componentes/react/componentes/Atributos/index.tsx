@@ -7,43 +7,68 @@ import Atributo from './componentes/Atributo';
 interface PropsI {
     isShow: boolean,
     tituloAtributo: string,
-    tamaño: string
-}
-interface OptionsI {
-    IS_SHOW: boolean,
-    TITULO_ATRIBUTO: string
-    TAMAÑO: string
-}
-const OPTIONS:OptionsI = {
-    IS_SHOW:true,
-    TITULO_ATRIBUTO: 'Titulo del Bloque',
-    TAMAÑO: '24px'
+    subTitleBoolean: boolean
+    subTitle: string,
+    backgroundContainer:any
+    tamañoContenedor: number,
+    flexDirectionContainer?:any,
+    fontWeightTitulo: number,
+    fontWeightAtributo: number,
+    fontWeightValue:number,
+    tamañoTitulo:number,
+    tamañoAtributo:number
+    tamañoValue:number
 }
 
 const Atributos = (props: PropsI) => {
-    const {isShow, tituloAtributo, tamaño} = props
+    const {
+        isShow, 
+        tituloAtributo,
+        subTitleBoolean,
+        subTitle,
+        tamañoContenedor,
+        backgroundContainer,
+        flexDirectionContainer,
+        fontWeightTitulo,
+        fontWeightAtributo,
+        fontWeightValue,
+        tamañoTitulo,
+        tamañoAtributo,
+        tamañoValue
+    } = props;
+    
     const { product } = useContext(ProductContext);
     const properties = product.properties
+    const subTitleTrue = subTitle
+    console.log(props)
     return useMemo(() =>{
         return (
             <>
-                {isShow ? 
-                    <div className={styles.ContenedorAtributos}>
-                        <Titulo
-                            tituloAtributo={tituloAtributo}
-                            tamaño={tamaño}
-                        />
-                        <Atributo 
-                            properties={properties}
-                        />
-                    </div>
-                : <Fragment/>
-
-                }
+            {isShow ? 
+                <div 
+                    className={styles.ContenedorAtributos}
+                    style={{width: `${tamañoContenedor}%`, flexDirection: flexDirectionContainer, backgroundColor: backgroundContainer}}
+                    >
+                    <Titulo 
+                        tituloAtributo={tituloAtributo}
+                        fontWeightTitulo={fontWeightTitulo}
+                        tamañoTitulo={tamañoTitulo}
+                    />
+                    {subTitleBoolean ? <span className={styles.textoSubTitle}>{subTitleTrue}</span> : <Fragment/>}
+                    <Atributo
+                        properties={properties}
+                        fontWeightAtributo={fontWeightAtributo}
+                        fontWeightValue={fontWeightValue}
+                        tamañoAtributo={tamañoAtributo}
+                        tamañoValue={tamañoValue}
+                    />
+                </div>
+            : <Fragment/>}
             </>
         )
     },[props])
 }
+
 Atributos.schema = {
     title: 'Componente Atributos',
     type: 'object',
@@ -51,23 +76,124 @@ Atributos.schema = {
         isShow:{
             title: "Ocultar el componente?",
             type: 'boolean',
-            default: OPTIONS.IS_SHOW
+            default: true
+        },
+        backgroundContainer:{
+            title: 'Color de fondo contendor padre',
+            type: 'string',
+            widget: {
+                'ui:widget': 'color'
+            }
+        },
+        tamañoContenedor:{
+            title: "Tamaño del contenedor padre",
+            type: 'number',
+            default: 100
         },
         tituloAtributo:{
             title: "Titulo del contenedor",
             type: 'string',
-            default: OPTIONS.TITULO_ATRIBUTO
+            default: "Titulo del bloque"
         },
-        tamaño: {
-            title: "Tamaño del titulo",
+        subTitleBoolean:{
+            title: "Desea agregar un sub titulo?",
+            type: 'boolean',
+            default: false
+        },
+        subTitleTrue:{
+            title: "Texto del sub titulo",
+            type: 'string',
+            default: ''
+        },
+        fontWeightTitulo:{
+            title: "Font Weight Titulo",
             type: "string",
-            default: OPTIONS.TAMAÑO
-        }
+            description: 'Font Weight del Titulo',
+            enum: [
+                "100",
+                "500",
+                "700"
+            ],
+            enumNames: [
+                "light",
+                "Normal",
+                "Bold"
+            ]
+        },
+        tamañoTitulo:{
+            title: "Tamaño del titulo",
+            type: 'number',
+            description: 'Puede ingresar un numero determinado para darle tamaño al texto',
+            default: 22
+        },
+        flexDirectionContainer: {
+            title: "Seleccionar posicion",
+            type: "string",
+            description: 'Alineacion del bloque',
+            enum: [
+                "row",
+                "column"
+            ],
+            enumNames: [
+                "Fila",
+                "Columna"
+            ]
+        },
+        fontWeightAtributo:{
+            title: "Font Weight Atributo",
+            type: "string",
+            enum: [
+                "100",
+                "500",
+                "700"
+            ],
+            enumNames: [
+                "light",
+                "Normal",
+                "Bold"
+            ]
+        },
+        tamañoAtributo:{
+            title: "Tamaño del atributo",
+            type: 'number',
+            description: 'Puede ingresar un numero determinado para darle tamaño al texto',
+            default: 22
+        },
+        fontWeightValue:{
+            title: "Font Weight Valor Atributo",
+            type: "string",
+            enum: [
+                "100",
+                "500",
+                "700"
+            ],
+            enumNames: [
+                "light",
+                "Normal",
+                "Bold"
+            ]
+        },
+        tamañoValue:{
+            title: "Tamaño del valor de atributo",
+            type: 'number',
+            description: 'Puede ingresar un numero determinado para darle tamaño al texto',
+            default: 22
+        },
     }
-}
+} 
 Atributos.defaultProps = {
-    isShow:OPTIONS.IS_SHOW,
-    tituloAtributo: OPTIONS.TITULO_ATRIBUTO,
-    tamaño:OPTIONS.TAMAÑO
+    isShow:true,
+    tituloAtributo: "Titulo del bloque",
+    subTitleBoolean: false,
+    subTitle: '',
+    backgroundContainer: '#fff',
+    tamañoContenedor: 100,
+    flexDirectionContainer: 'row',
+    fontWeightTitulo: '',
+    fontWeightAtributo: '',
+    fontWeightValue: '',
+    tamañoTitulo: 22,
+    tamañoAtributo: 18,
+    tamañoValue:18
 }
 export default Atributos

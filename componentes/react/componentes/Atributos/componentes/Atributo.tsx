@@ -1,30 +1,48 @@
-import React, { Fragment, useMemo } from 'react'
+import React, {Fragment, useMemo} from 'react';
 import styles from '../styles.css'
 
 interface PropertiesI {
-    properties: Property[]
+    properties: Property[],
+    fontWeightAtributo: number,
+    fontWeightValue:number,
+    tamañoAtributo: number,
+    tamañoValue: number
 }
-
 interface Property {
     name: string,
     values: string
 }
 const Atributo = (props: PropertiesI) => {
-    const {properties} = props
+    const {
+        properties,
+        fontWeightAtributo,
+        fontWeightValue,
+        tamañoAtributo,
+        tamañoValue
+    } = props
     return useMemo(() => {
-        return (
+        console.log(properties)
+        return(
             <div className={styles.ContenedorAtributo}>
-                {properties && properties.length ? 
-                    properties.map((e:Property) => (
+                {properties && properties.length ?
+                    properties.map(e => (
                         <div className={styles.atributo}>
-                            <span className={styles.nombreAtributo}>{e.name}</span>
-                            <span className={styles.valorAtributo}>{e.values}</span>
+                            <span 
+                                className={styles.nombreAtributo}
+                                style={{fontWeight: fontWeightAtributo, fontSize: `${tamañoAtributo}px`}}
+                            >{e.name}:</span>
+                            <span 
+                                className={styles.valorAtributo}
+                                style={{fontWeight: fontWeightValue, fontSize: `${tamañoValue}px`}}
+                            >{e.values}</span>
                         </div>
                     ))
-                : <Fragment/>}
+                
+                : <Fragment/>
+                }
             </div>
         )
-    },[properties])
+    },[props, properties])
 }
 
 export default Atributo

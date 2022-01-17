@@ -1,8 +1,13 @@
 .ContenedorAtributos{
-
+    display: flex;
 }
 .ContenedorAtributo{
 
+}
+
+.textoSubTitle{
+    font-size: 8px;
+    font-weight: 300;
 }
 
 .TituloAtributos{
@@ -10,13 +15,13 @@
 }
 
 .atributo{
-
+    display: flex;
 }
 
 .nombreAtributo{
-
+    width: 40%;
 }
 
 .valorAtributo{
-
+    width: auto;
 }

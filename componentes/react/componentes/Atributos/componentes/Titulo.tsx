@@ -1,18 +1,17 @@
-import React from 'react'
+import React from 'react';
 import styles from '../styles.css'
 interface Title {
-    tituloAtributo: string
-    tamaño: string
+    tituloAtributo: string,
+    fontWeightTitulo: number,
+    tamañoTitulo: number
 }
 const Titulo = (props: Title) => {
-    const {tituloAtributo, tamaño} = props
+    const {tituloAtributo, fontWeightTitulo, tamañoTitulo} = props
     return (
-       <h2 
-        className={styles.TituloAtributos}
-        style={{fontSize: tamaño}}
-       >{tituloAtributo}</h2>
+        <h2 
+            className={styles.TituloAtributos}
+            style={{fontWeight: fontWeightTitulo, fontSize:`${tamañoTitulo}px`}}
+        >{tituloAtributo}</h2>
     )
 }
-
 export default Titulo
-
