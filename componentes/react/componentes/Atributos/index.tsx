@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment, useContext, useState } from 'react';
+import React, { useMemo, Fragment, useContext} from 'react';
 import {ProductContext} from 'vtex.product-context';
 import styles from './styles.css'
 import Titulo from './componentes/Titulo'

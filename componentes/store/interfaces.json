@@ -5,5 +5,8 @@
   "glamit-destaques-container":{
     "component": "DestaqueContainer",
     "composition": "children"
+  },
+  "glamit-stock-alert":{
+    "component": "StockAlert"
   }
 }
